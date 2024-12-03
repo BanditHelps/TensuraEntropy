@@ -1,6 +1,7 @@
 package com.github.b4ndithelps.tentropy.ability.skill.extra;
 
 import com.github.b4ndithelps.tentropy.TensuraEntropy;
+import com.github.b4ndithelps.tentropy.effect.ModEffects;
 import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkillInstance;
 import com.github.manasmods.manascore.api.skills.SkillAPI;
@@ -18,11 +19,14 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
@@ -32,10 +36,12 @@ import java.util.Objects;
 
 /**
  * Scans all the ores around the player in a different radius
+ * Obtained by mining 100 diamond ores.
  */
 public class MinersEyeSkill extends Skill {
 
     private final double epUnlockCost = 60000.0;
+    private final double miningReq = 100.0;
 
     public ResourceLocation getSkillIcon() {
         return new ResourceLocation(TensuraEntropy.MODID, "textures/skill/extra/miners_eye.png");
@@ -53,9 +59,15 @@ public class MinersEyeSkill extends Skill {
         return true;
     }
 
-    // TODO make this based on ores mined
     public boolean meetEPRequirement(Player entity, double curEP) {
-        return curEP >= epUnlockCost;
+        if (entity instanceof ServerPlayer player) {
+            int diamondsMined = player.getStats().getValue(Stats.BLOCK_MINED.get(Blocks.DIAMOND_ORE)) +
+                    player.getStats().getValue(Stats.BLOCK_MINED.get(Blocks.DEEPSLATE_DIAMOND_ORE));
+
+            return diamondsMined >= 100;
+        }
+
+        return false;
     }
 
     public boolean canBeToggled(ManasSkillInstance instance, LivingEntity living) {
@@ -78,7 +90,7 @@ public class MinersEyeSkill extends Skill {
                 this.addMasteryPoint(instance, living);
             }
 
-            living.addEffect(new MobEffectInstance((MobEffect) TensuraMobEffects.PRESENCE_SENSE.get(), 20, 1, false, false));
+            living.addEffect(new MobEffectInstance(ModEffects.MINER_EYE_EFFECT.get(), 20, 1, false, false));
             return true;
         }
     }
@@ -92,7 +104,7 @@ public class MinersEyeSkill extends Skill {
 
             instance.setToggled(false);
         } else {
-            entity.addEffect(new MobEffectInstance((MobEffect)TensuraMobEffects.PRESENCE_SENSE.get(), 200, 1, false, false, false));
+            entity.addEffect(new MobEffectInstance(ModEffects.MINER_EYE_EFFECT.get(), 200, 1, false, false, false));
         }
     }
 
@@ -102,10 +114,10 @@ public class MinersEyeSkill extends Skill {
     }
 
     public void onToggleOff(ManasSkillInstance instance, LivingEntity entity) {
-        if (entity.hasEffect((MobEffect)TensuraMobEffects.PRESENCE_SENSE.get())) {
-            int level = ((MobEffectInstance) Objects.requireNonNull(entity.getEffect((MobEffect)TensuraMobEffects.PRESENCE_SENSE.get()))).getAmplifier();
+        if (entity.hasEffect(ModEffects.MINER_EYE_EFFECT.get())) {
+            int level = ((MobEffectInstance) Objects.requireNonNull(entity.getEffect(ModEffects.MINER_EYE_EFFECT.get()))).getAmplifier();
             if (level == 1) {
-                entity.removeEffect((MobEffect)TensuraMobEffects.PRESENCE_SENSE.get());
+                entity.removeEffect(ModEffects.MINER_EYE_EFFECT.get());
             }
         }
 

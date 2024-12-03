@@ -14,5 +14,13 @@
   "tentropy.skill.mode.example_unique.big_boom": "Bigger Boom",
 
   "tentropy.skill.example_intrinsic": "Example Intrinsic",
-  "tentropy.skill.example_intrinsic.description": "This is a description for the intrinsic skill. Edit this description using the en_us.json file."
+  "tentropy.skill.example_intrinsic.description": "This is a description for the intrinsic skill. Edit this description using the en_us.json file.",
+
+  "tentropy.skill.miners_eye": "Miner's Eye",
+  "tentropy.skill.miners_eye.description": "Channel Magicules through your eyeball and use it to glint the residual energy in ores around you.",
+
+
+  "effect.tenropy.miners_eye": "Miner's Eye"
+
+
 }
