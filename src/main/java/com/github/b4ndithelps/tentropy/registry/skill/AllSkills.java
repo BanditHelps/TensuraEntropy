@@ -1,12 +1,13 @@
-package com.github.b4ndithelps.tenaddex.registry.skill;
+package com.github.b4ndithelps.tentropy.registry.skill;
 
 
-import com.github.b4ndithelps.tenaddex.TensuraAddonExample;
-import com.github.b4ndithelps.tenaddex.ability.skill.common.ExampleCommonSkill;
-import com.github.b4ndithelps.tenaddex.ability.skill.extra.ExampleExtraSkill;
-import com.github.b4ndithelps.tenaddex.ability.skill.intrinsic.ExampleIntrinsicSkill;
-import com.github.b4ndithelps.tenaddex.ability.skill.ultimate.ExampleUltimateSkill;
-import com.github.b4ndithelps.tenaddex.ability.skill.unique.ExampleUniqueSkill;
+import com.github.b4ndithelps.tentropy.TensuraEntropy;
+import com.github.b4ndithelps.tentropy.ability.skill.common.ExampleCommonSkill;
+import com.github.b4ndithelps.tentropy.ability.skill.extra.ExampleExtraSkill;
+import com.github.b4ndithelps.tentropy.ability.skill.extra.MinersEyeSkill;
+import com.github.b4ndithelps.tentropy.ability.skill.intrinsic.ExampleIntrinsicSkill;
+import com.github.b4ndithelps.tentropy.ability.skill.ultimate.ExampleUltimateSkill;
+import com.github.b4ndithelps.tentropy.ability.skill.unique.ExampleUniqueSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.SkillAPI;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,7 +24,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class AllSkills {
 
     // Here is that deferred register I was talking about. You don't need to change it at all
-    public static DeferredRegister<ManasSkill> skillRegistry = DeferredRegister.create(SkillAPI.getSkillRegistryKey(), TensuraAddonExample.MODID);
+    public static DeferredRegister<ManasSkill> skillRegistry = DeferredRegister.create(SkillAPI.getSkillRegistryKey(), TensuraEntropy.MODID);
 
     public static void register(IEventBus modEventBus) {
         skillRegistry.register(modEventBus);
@@ -46,8 +47,8 @@ public class AllSkills {
     //   ================
     //   | Extra Skills |
     //   ================
-    public static final RegistryObject<ExampleExtraSkill> EXAMPLE_EXTRA =
-            skillRegistry.register("example_extra", ExampleExtraSkill::new);
+    public static final RegistryObject<MinersEyeSkill> MINERS_EYE =
+            skillRegistry.register("miners_eye", MinersEyeSkill::new);
 
     //   =================
     //   | Unique Skills |

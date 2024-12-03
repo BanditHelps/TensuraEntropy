@@ -1,0 +1,18 @@
+{
+  "tentropy.skill.example_ultimate": "Example Ultimate",
+  "tentropy.skill.example_ultimate.description": "This is a description for the ultimate skill. Edit this description using the en_us.json file.",
+
+  "tentropy.skill.example_common": "Example Common",
+  "tentropy.skill.example_common.description": "This is a description for the common skill. Edit this description using the en_us.json file.",
+
+  "tentropy.skill.example_extra": "Example Extra",
+  "tentropy.skill.example_extra.description": "This is a description for the extra skill. Edit this description using the en_us.json file.",
+
+  "tentropy.skill.example_unique": "Example Unique",
+  "tentropy.skill.example_unique.description": "This is a description for the unique skill. Edit this description using the en_us.json file.",
+  "tentropy.skill.mode.example_unique.boom": "Boom",
+  "tentropy.skill.mode.example_unique.big_boom": "Bigger Boom",
+
+  "tentropy.skill.example_intrinsic": "Example Intrinsic",
+  "tentropy.skill.example_intrinsic.description": "This is a description for the intrinsic skill. Edit this description using the en_us.json file."
+}

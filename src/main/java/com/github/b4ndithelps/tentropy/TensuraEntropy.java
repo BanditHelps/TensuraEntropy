@@ -1,6 +1,6 @@
-package com.github.b4ndithelps.tenaddex;
+package com.github.b4ndithelps.tentropy;
 
-import com.github.b4ndithelps.tenaddex.registry.skill.AllSkills;
+import com.github.b4ndithelps.tentropy.registry.skill.AllSkills;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,15 +15,15 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(TensuraAddonExample.MODID)
-public class TensuraAddonExample {
+@Mod(TensuraEntropy.MODID)
+public class TensuraEntropy {
 
     // Define mod id in a common place for everything to reference
-    public static final String MODID = "tenaddex";
+    public static final String MODID = "tentropy";
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public TensuraAddonExample() {
+    public TensuraEntropy() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
 
@@ -31,7 +31,7 @@ public class TensuraAddonExample {
         AllSkills.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
-        LOGGER.info("Tensura Example Addon has been loaded!");
+        LOGGER.info("Tensura Entropy Addon has been loaded!");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

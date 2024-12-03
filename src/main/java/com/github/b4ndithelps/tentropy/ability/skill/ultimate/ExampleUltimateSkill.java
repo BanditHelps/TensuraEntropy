@@ -1,6 +1,6 @@
-package com.github.b4ndithelps.tenaddex.ability.skill.ultimate;
+package com.github.b4ndithelps.tentropy.ability.skill.ultimate;
 
-import com.github.b4ndithelps.tenaddex.TensuraAddonExample;
+import com.github.b4ndithelps.tentropy.TensuraEntropy;
 import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkillInstance;
 import com.github.manasmods.tensura.ability.SkillHelper;
@@ -34,7 +34,7 @@ public class ExampleUltimateSkill extends Skill {
      * @return
      */
     public ResourceLocation getSkillIcon() {
-        return new ResourceLocation(TensuraAddonExample.MODID, "textures/skill/ultimate/example_ultimate.png");
+        return new ResourceLocation(TensuraEntropy.MODID, "textures/skill/ultimate/example_ultimate.png");
     }
 
     public ExampleUltimateSkill() {

@@ -1,6 +1,6 @@
-package com.github.b4ndithelps.tenaddex.ability.skill.extra;
+package com.github.b4ndithelps.tentropy.ability.skill.extra;
 
-import com.github.b4ndithelps.tenaddex.TensuraAddonExample;
+import com.github.b4ndithelps.tentropy.TensuraEntropy;
 import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkillInstance;
 import com.github.manasmods.tensura.ability.SkillHelper;
@@ -15,13 +15,10 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.AABB;
 
 
 /**
@@ -35,7 +32,7 @@ public class ExampleExtraSkill extends Skill {
      * @return
      */
     public ResourceLocation getSkillIcon() {
-        return new ResourceLocation(TensuraAddonExample.MODID, "textures/skill/extra/example_extra.png");
+        return new ResourceLocation(TensuraEntropy.MODID, "textures/skill/extra/example_extra.png");
     }
 
     // Here are some easy to change parameters to configure for the skill

@@ -1,6 +1,6 @@
-package com.github.b4ndithelps.tenaddex.ability.skill.unique;
+package com.github.b4ndithelps.tentropy.ability.skill.unique;
 
-import com.github.b4ndithelps.tenaddex.TensuraAddonExample;
+import com.github.b4ndithelps.tentropy.TensuraEntropy;
 import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkillInstance;
 import com.github.manasmods.tensura.ability.SkillHelper;
@@ -12,14 +12,8 @@ import com.github.manasmods.tensura.registry.skill.CommonSkills;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 
 
 /**
@@ -40,7 +34,7 @@ public class ExampleUniqueSkill extends Skill {
      * @return
      */
     public ResourceLocation getSkillIcon() {
-        return new ResourceLocation(TensuraAddonExample.MODID, "textures/skill/unique/example_unique.png");
+        return new ResourceLocation(TensuraEntropy.MODID, "textures/skill/unique/example_unique.png");
     }
 
     public ExampleUniqueSkill() {
