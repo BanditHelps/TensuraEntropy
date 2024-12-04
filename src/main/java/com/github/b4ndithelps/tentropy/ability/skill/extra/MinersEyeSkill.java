@@ -2,19 +2,9 @@ package com.github.b4ndithelps.tentropy.ability.skill.extra;
 
 import com.github.b4ndithelps.tentropy.TensuraEntropy;
 import com.github.b4ndithelps.tentropy.effect.ModEffects;
-import com.github.manasmods.manascore.api.skills.ManasSkill;
 import com.github.manasmods.manascore.api.skills.ManasSkillInstance;
-import com.github.manasmods.manascore.api.skills.SkillAPI;
-import com.github.manasmods.manascore.api.skills.capability.SkillStorage;
-import com.github.manasmods.manascore.api.skills.event.UnlockSkillEvent;
 import com.github.manasmods.tensura.ability.SkillHelper;
-import com.github.manasmods.tensura.ability.SkillUtils;
-import com.github.manasmods.tensura.ability.TensuraSkillInstance;
 import com.github.manasmods.tensura.ability.skill.Skill;
-import com.github.manasmods.tensura.capability.race.TensuraPlayerCapability;
-import com.github.manasmods.tensura.race.slime.SlimeRace;
-import com.github.manasmods.tensura.registry.effects.TensuraMobEffects;
-import com.github.manasmods.tensura.registry.skill.ExtraSkills;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -23,10 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
@@ -39,9 +26,6 @@ import java.util.Objects;
  * Obtained by mining 100 diamond ores.
  */
 public class MinersEyeSkill extends Skill {
-
-    private final double epUnlockCost = 60000.0;
-    private final double miningReq = 100.0;
 
     public ResourceLocation getSkillIcon() {
         return new ResourceLocation(TensuraEntropy.MODID, "textures/skill/extra/miners_eye.png");
@@ -59,6 +43,7 @@ public class MinersEyeSkill extends Skill {
         return true;
     }
 
+    // No EP Requirement, but they do need to mine 100 diamond ores to unlock this skill
     public boolean meetEPRequirement(Player entity, double curEP) {
         if (entity instanceof ServerPlayer player) {
             int diamondsMined = player.getStats().getValue(Stats.BLOCK_MINED.get(Blocks.DIAMOND_ORE)) +
@@ -104,7 +89,13 @@ public class MinersEyeSkill extends Skill {
 
             instance.setToggled(false);
         } else {
-            entity.addEffect(new MobEffectInstance(ModEffects.MINER_EYE_EFFECT.get(), 200, 1, false, false, false));
+            // Mastery grants a higher range, as well as better ore detection
+            if (instance.isMastered(entity)) {
+                entity.addEffect(new MobEffectInstance(ModEffects.MINER_EYE_EFFECT.get(), 200, 1, false, false, false));
+            } else {
+                entity.addEffect(new MobEffectInstance(ModEffects.MINER_EYE_EFFECT.get(), 200, 0, false, false, false));
+            }
+
         }
     }
 
