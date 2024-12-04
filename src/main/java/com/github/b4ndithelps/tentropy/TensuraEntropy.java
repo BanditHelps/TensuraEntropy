@@ -1,6 +1,7 @@
 package com.github.b4ndithelps.tentropy;
 
 import com.github.b4ndithelps.tentropy.effect.ModEffects;
+import com.github.b4ndithelps.tentropy.handlers.MinerEyeWireFrameRenderer;
 import com.github.b4ndithelps.tentropy.registry.skill.AllSkills;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -58,6 +59,7 @@ public class TensuraEntropy {
             // Some client setup code
             LOGGER.info("HELLO FROM CLIENT SETUP");
             LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            MinecraftForge.EVENT_BUS.register(MinerEyeWireFrameRenderer.class);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.github.b4ndithelps.tentropy.effect;
 
-import com.github.b4ndithelps.tentropy.handlers.HighlightHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
@@ -17,6 +16,7 @@ import java.util.Set;
 
 public class MinerEyeEffect extends MobEffect {
 
+    private static final Set<BlockPos> detectedOres = new HashSet<>();
 
     protected MinerEyeEffect(MobEffectCategory pCategory, int pColor) {
         super(pCategory, pColor);
@@ -24,7 +24,7 @@ public class MinerEyeEffect extends MobEffect {
 
     @Override
     public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (!(entity instanceof Player player) || player.level.isClientSide) {
+        if (!(entity instanceof Player player) || !player.level.isClientSide) {
             // Only run if the entity is a player or it is ran on a client
             return;
         }
@@ -33,7 +33,7 @@ public class MinerEyeEffect extends MobEffect {
         int radius = 8 + amplifier * 2;
         BlockPos playerPos = player.blockPosition();
 
-        Set<BlockPos> detectedOres = new HashSet<>();
+        detectedOres.clear();
 
         // Radius 8x8x8 - amplifier applies to it
         for (int x = -radius; x <= radius; x++) {
@@ -45,20 +45,13 @@ public class MinerEyeEffect extends MobEffect {
                     Block block = blockState.getBlock();
 
                     if (isOre(block)) {
-                        player.displayClientMessage(Component.literal("You found a " + block.getName().toString() + "at " + x + ", " + y + ", " + z), false);
-//                        detectedOres.add(pos);
+//                        player.displayClientMessage(Component.literal("You found a " + block.getName().toString() + "at " + x + ", " + y + ", " + z), false);
+                        detectedOres.add(pos);
                     }
                 }
             }
         }
 
-        if (!detectedOres.isEmpty()) {
-//            HighlightHandler.clearHighlights();
-//            detectedOres.forEach(HighlightHandler::addBlockPos);
-        }
-
-
-//        super.applyEffectTick(entity, amplifier);
     }
 
     @Override
@@ -68,6 +61,16 @@ public class MinerEyeEffect extends MobEffect {
     }
 
     private boolean isOre(Block block) {
-        return block == Blocks.COAL_ORE;
+        return block == Blocks.COAL_ORE
+                || block == Blocks.IRON_ORE
+                || block == Blocks.GOLD_ORE
+                || block == Blocks.DIAMOND_ORE
+                || block == Blocks.EMERALD_ORE
+                || block == Blocks.REDSTONE_ORE
+                || block == Blocks.LAPIS_ORE;
+    }
+
+    public static Set<BlockPos> getDetectedOres() {
+        return detectedOres;
     }
 }
